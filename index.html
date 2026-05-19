@@ -2146,7 +2146,7 @@
         --gallery-gap: 4px;
         --gallery-visible: 2.5;
         margin-top: 100px;
-        padding: 0;
+        padding: 0 0 100px;
         margin-bottom: 0;
         background: #1a1a1a;
         overflow-x: clip;
@@ -2290,8 +2290,147 @@
         }
       }
 
+      .gallery-footer {
+        margin-top: 48px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .gallery-view-more-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 48px;
+        border: 1px solid rgba(198, 168, 108, 0.45);
+        border-radius: var(--radius-btn);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.72);
+        font-family: "Spectral", serif;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: border-color var(--motion-hover), color var(--motion-hover);
+      }
+
+      .gallery-view-more-btn:hover {
+        border-color: rgba(198, 168, 108, 0.9);
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .gallery-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 110;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--page-gutter);
+        background: rgba(0, 0, 0, 0.78);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity var(--motion-transition),
+          visibility var(--motion-transition);
+      }
+
+      .gallery-modal.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .gallery-modal-open {
+        overflow: hidden;
+      }
+
+      .gallery-modal__panel {
+        width: min(var(--content-max), 100%);
+        max-height: min(90vh, 900px);
+        overflow-y: auto;
+        background: #1a1a1a;
+        border: 1px solid rgba(198, 168, 108, 0.28);
+        padding: 36px 32px 40px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .gallery-modal__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .gallery-modal__title {
+        margin: 0;
+        font-family: "Spectral", serif;
+        font-size: var(--text-h2-size);
+        font-weight: var(--text-h2-weight);
+        line-height: var(--text-h2-lh);
+        letter-spacing: var(--text-h2-ls);
+        color: var(--cream);
+      }
+
+      .gallery-modal__close {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border: 1px solid rgba(198, 168, 108, 0.45);
+        border-radius: var(--radius-btn);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        transition: border-color var(--motion-hover), color var(--motion-hover);
+      }
+
+      .gallery-modal__close:hover {
+        border-color: rgba(198, 168, 108, 0.9);
+        color: #fff;
+      }
+
+      .gallery-modal__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .gallery-modal__item {
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg-card);
+      }
+
+      .gallery-modal__item img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+      }
+
+      @media (max-width: 820px) {
+        .gallery-modal__grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .gallery-modal__panel {
+          padding: 28px 20px 32px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .gallery-modal__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       .gallery-section + .story-section {
-        margin-top: 100px;
+        margin-top: 0;
       }
 
       .story-section {
@@ -2722,16 +2861,13 @@
       <section class="hero" id="top" aria-label="KV">
         <div class="hero__slideshow" aria-hidden="true">
           <div class="hero__slide is-active">
-            <img src="./image/kv-main.jpg" alt="" loading="eager" decoding="async" />
-          </div>
-          <div class="hero__slide">
             <img src="./image/007.jpg" alt="" loading="eager" decoding="async" />
           </div>
           <div class="hero__slide">
-            <img src="./image/00278.jpg" alt="" loading="eager" decoding="async" />
+            <img src="./image/00278.jpg" alt="" loading="lazy" decoding="async" />
           </div>
           <div class="hero__slide">
-            <img src="./image/202106_R105_太田 (9).jpg" alt="" loading="eager" decoding="async" />
+            <img src="./image/202106_R105_太田 (9).jpg" alt="" loading="lazy" decoding="async" />
           </div>
         </div>
 
@@ -3567,7 +3703,59 @@
             </button>
         </div>
       </div>
+
+      <div class="gallery-footer">
+        <button type="button" class="gallery-view-more-btn" data-gallery-open aria-haspopup="dialog">
+          View More
+        </button>
+      </div>
     </section>
+
+    <div
+      class="gallery-modal"
+      id="galleryModal"
+      hidden
+      aria-hidden="true"
+      aria-labelledby="galleryModalTitle"
+    >
+      <div class="gallery-modal__panel" role="dialog" aria-modal="true">
+        <div class="gallery-modal__head">
+          <h3 class="gallery-modal__title" id="galleryModalTitle">Gallery</h3>
+          <button type="button" class="gallery-modal__close" data-gallery-close aria-label="Close gallery">
+            ×
+          </button>
+        </div>
+        <div class="gallery-modal__grid">
+          <figure class="gallery-modal__item">
+            <img src="./image/en_fujiseiran_PCKV.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/002.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/003.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/004.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/005.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/en_oyashikistay_AR05.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/en_meitokuan_AR05.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/en_takigahara-natadera_SN6.jpg" alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="gallery-modal__item">
+            <img src="./image/images_d704a0a1-b6ab-410b-b11c-59ec5b1e991e.jpeg" alt="" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </div>
+    </div>
 
     <section class="story-section section">
       <div class="container">
@@ -4571,6 +4759,53 @@
         }
         window.addEventListener("load", update);
         update();
+      })();
+
+      // Gallery modal (View More)
+      (function initGalleryModal() {
+        const modal = document.getElementById("galleryModal");
+        const openBtn = document.querySelector("[data-gallery-open]");
+        if (!modal || !openBtn) return;
+
+        const panel = modal.querySelector(".gallery-modal__panel");
+        const closeBtn = modal.querySelector("[data-gallery-close]");
+        let lastFocused = null;
+
+        function openModal() {
+          lastFocused = document.activeElement;
+          modal.hidden = false;
+          modal.setAttribute("aria-hidden", "false");
+          modal.classList.add("is-open");
+          document.body.classList.add("gallery-modal-open");
+          closeBtn?.focus();
+        }
+
+        function closeModal() {
+          modal.classList.remove("is-open");
+          modal.setAttribute("aria-hidden", "true");
+          modal.hidden = true;
+          document.body.classList.remove("gallery-modal-open");
+          if (lastFocused && typeof lastFocused.focus === "function") {
+            lastFocused.focus();
+          }
+        }
+
+        openBtn.addEventListener("click", openModal);
+        closeBtn?.addEventListener("click", closeModal);
+
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeModal();
+        });
+
+        panel?.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && modal.classList.contains("is-open")) {
+            closeModal();
+          }
+        });
       })();
 
       // Hero KV slideshow
