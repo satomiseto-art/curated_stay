@@ -14,8 +14,2681 @@
     />
 
     <title>Wabunka Curated Stays</title>
+    <!-- 正しいデプロイ版: このファイルは約4700行。18行目が link rel=assets の古い版は使わないこと -->
 
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <style>
+/* 外部CSSが読めない場合の緊急フォールバック */
+html, body { margin: 0; background: #1a1a1a; color: #f4f1ed; }
+.nav-link__icon { display: inline-flex; width: 16px; height: 16px; flex-shrink: 0; }
+.nav-link__icon svg { display: block; width: 16px; height: 16px; max-width: 16px; max-height: 16px; }
+
+:root {
+  /* Color — dark mode */
+  --bg: #1a1a1a;
+  --bg-card: #1a1a1a;
+  --border: #f4f1ed;
+  --border-accent: #c6a86c;
+  --brown: #1a1a1a;
+  --gold: #c6a86c;
+  --cream: #f4f1ed;
+  --ink: rgba(244, 241, 237, 0.92);
+  --muted: rgba(244, 241, 237, 0.6);
+  --cardShadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+
+  /* Typography */
+  --text-h1-size: 36px;
+  --text-h1-weight: 400;
+  --text-h1-lh: 48px;
+  --text-h1-ls: 0.5px;
+  --text-h2-size: 26px;
+  --text-h2-weight: 400;
+  --text-h2-lh: 40px;
+  --text-h2-ls: 0.5px;
+  --text-h3-size: 22px;
+  --text-h3-weight: 400;
+  --text-h3-lh: 32px;
+  --text-h3-ls: 0.5px;
+  --text-p1-size: 17px;
+  --text-p1-weight: 300;
+  --text-p1-lh: 24px;
+  --text-p2-size: 16px;
+  --text-p2-weight: 300;
+  --text-p2-lh: 20px;
+
+  /* Border radius */
+  --radius: 0px;
+  --radius-btn: 4px;
+  --radius-modal: 8px;
+
+  /* Motion */
+  --motion-hover: 150ms ease-out;
+  --motion-transition: 300ms ease-in-out;
+
+  /* Horizontal page gutter & content width */
+  --page-gutter: 120px;
+  --content-max: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  font-family: "Spectral", serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: var(--text-p1-size);
+  font-weight: var(--text-p1-weight);
+  line-height: var(--text-p1-lh);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Spectral", serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--text-h1-size);
+  font-weight: var(--text-h1-weight);
+  line-height: var(--text-h1-lh);
+  letter-spacing: var(--text-h1-ls);
+}
+
+h2 {
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+}
+
+h3 {
+  font-size: var(--text-h3-size);
+  font-weight: var(--text-h3-weight);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-ls);
+}
+
+p {
+  font-size: var(--text-p1-size);
+  font-weight: var(--text-p1-weight);
+  line-height: var(--text-p1-lh);
+  margin: 0;
+}
+
+.text-p2 {
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+}
+
+a,
+nav,
+button {
+  font-family: "Spectral", serif;
+}
+
+.container {
+  width: min(var(--content-max), calc(100vw - 2 * var(--page-gutter)));
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Header (Wabunka) */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0) 100%);
+  border-bottom: none;
+  backdrop-filter: none;
+}
+
+.site-header .nav {
+  position: relative;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: min(1440px, 100%);
+  max-width: 1440px;
+  height: 70px;
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--cream);
+}
+
+.logo__img {
+  display: block;
+  height: 20px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cream);
+  text-decoration: none;
+  font-family: "Spectral", serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  padding: 8px;
+  border-radius: 0;
+  transition: opacity var(--motion-hover);
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  opacity: 0.82;
+  background: transparent;
+  color: var(--cream);
+}
+
+.nav-link__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.nav-link__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition: transform var(--motion-hover), opacity var(--motion-hover);
+}
+
+/* Menu drawer panel (Wabunka) */
+.nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--motion-transition),
+    visibility var(--motion-transition);
+}
+
+.nav-open .nav-drawer {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.nav-open {
+  overflow: hidden;
+}
+
+.nav-drawer__inner {
+  position: relative;
+  width: min(390px, 100vw);
+  height: 100%;
+  margin: 0;
+  padding: 72px 24px 48px;
+  background: #ffffff;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform var(--motion-transition);
+}
+
+.nav-open .nav-drawer__inner {
+  transform: translateX(0);
+}
+
+.nav-drawer__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+.nav-drawer__close svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.nav-drawer__menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-drawer__divider {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 8px 0 16px;
+}
+
+.nav-drawer__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 0;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-family: "Spectral", serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  transition: opacity var(--motion-hover);
+}
+
+.nav-drawer__item:hover {
+  opacity: 0.65;
+}
+
+.nav-drawer__item-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.nav-drawer__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: #1a1a1a;
+}
+
+.nav-drawer__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-drawer__chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  color: #1a1a1a;
+  opacity: 0.85;
+}
+
+.nav-drawer__chevron svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-drawer__follow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0 8px;
+  color: #1a1a1a;
+  font-family: "Spectral", serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.nav-drawer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-drawer__social a {
+  display: inline-flex;
+  color: #1a1a1a;
+  transition: opacity var(--motion-hover);
+}
+
+.nav-drawer__social a:hover {
+  opacity: 0.65;
+}
+
+.nav-drawer__social svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 100vh;
+  padding-top: 0;
+  display: block;
+  background: var(--brown);
+  overflow: hidden;
+}
+
+.hero__slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out;
+  will-change: opacity;
+}
+
+.hero__slide.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transform: scale(1.04);
+  filter: brightness(0.88);
+  transition: transform 7s ease-out, filter var(--motion-transition);
+}
+
+.hero__slide.is-active img {
+  transform: scale(1);
+}
+
+.hero__slideshow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.32) 45%,
+    rgba(0, 0, 0, 0.68) 100%
+  );
+}
+
+@keyframes kv-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kv-scroll-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-inner .kv-copy,
+.hero-inner .kv-side p,
+.hero-inner .hero-actions .btn {
+  opacity: 0;
+  animation: kv-text-in 1s ease-out forwards;
+}
+
+.hero-inner .kv-copy {
+  animation-delay: 0.4s;
+}
+
+.hero-inner .kv-side p {
+  animation-delay: 0.62s;
+}
+
+.hero-inner .hero-actions .btn:nth-child(1) {
+  animation-delay: 0.84s;
+}
+
+.hero-inner .hero-actions .btn:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.hero .kv-scroll {
+  opacity: 0;
+  animation: kv-scroll-in 0.85s ease-out 1.18s forwards, kv-float 2.35s ease-in-out 2.35s infinite;
+}
+
+.hero-inner {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: flex-end;
+  width: min(var(--content-max), calc(100vw - 2 * var(--page-gutter)));
+  max-width: var(--content-max);
+  margin: 0;
+  padding: 0 0 80px;
+  transform: translateX(-50%);
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  color: rgba(244, 241, 237, 0.9);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 44px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(198, 168, 108, 0.95), rgba(198, 168, 108, 0.25));
+}
+
+.hero h1 {
+  font-family: "Spectral", serif;
+  color: var(--cream);
+  font-size: var(--text-h1-size);
+  line-height: var(--text-h1-lh);
+  font-weight: var(--text-h1-weight);
+  font-style: normal;
+  max-width: 580px;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  letter-spacing: var(--text-h1-ls);
+}
+
+.hero .kv-copy h1 {
+  font-size: calc(58px - 10pt);
+  line-height: 1.15;
+  max-width: 720px;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+}
+
+.kv-copy {
+  min-width: 0;
+}
+
+.kv-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-width: 0;
+  margin-left: auto;
+  max-width: 420px;
+}
+
+.kv-side p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+  max-width: 360px;
+  text-align: left;
+}
+
+.kv-side .hero-actions {
+  justify-content: flex-start;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--radius-btn);
+  padding: 12px 18px;
+  text-decoration: none;
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+  letter-spacing: 0.02em;
+  transition: background var(--motion-hover), border-color var(--motion-hover), color var(--motion-hover);
+  user-select: none;
+  cursor: pointer;
+}
+
+.btn--cream {
+  background: rgba(244, 241, 237, 0.08);
+  border: 1px solid rgba(244, 241, 237, 0.35);
+  color: rgba(244, 241, 237, 0.95);
+}
+
+.btn--cream:hover {
+  background: rgba(244, 241, 237, 0.12);
+  border-color: rgba(198, 168, 108, 0.5);
+}
+
+.btn--gold {
+  background: var(--gold);
+  border: 1px solid var(--border-accent);
+  color: var(--bg);
+  box-shadow: 0 14px 40px rgba(198, 168, 108, 0.22);
+}
+
+.btn--gold:hover {
+  background: #d4b87a;
+  border-color: #d4b87a;
+}
+
+/* Hero gallery */
+.hero-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 140px;
+  gap: 14px;
+  align-self: stretch;
+}
+
+.hero-tile {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(244, 241, 237, 0.18);
+  background: var(--bg-card);
+}
+
+.hero-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform var(--motion-transition);
+}
+
+.hero-tile:hover img {
+  transform: scale(1.09);
+}
+
+.hero-tile.tile-1 {
+  grid-column: 1 / -1;
+  grid-row: 1 / span 2;
+}
+
+.hero-tile.tile-2 {
+  grid-column: 1;
+}
+
+.hero-tile.tile-3 {
+  grid-column: 2;
+}
+
+/* Scroll hint arrow */
+.kv-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-btn);
+  border: 1px solid rgba(198, 168, 108, 0.42);
+  background: rgba(26, 26, 26, 0.65);
+  color: rgba(244, 241, 237, 0.95);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background var(--motion-hover), border-color var(--motion-hover);
+}
+
+.kv-scroll:hover {
+  background: rgba(198, 168, 108, 0.2);
+  border-color: rgba(198, 168, 108, 0.75);
+}
+
+.kv-scroll svg {
+  width: 22px;
+  height: 22px;
+}
+
+@keyframes kv-float {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+/* Sections */
+.section {
+  padding: 86px 0;
+}
+
+.section--tight {
+  padding: 66px 0;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.section-head h2 {
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  font-weight: var(--text-h2-weight);
+}
+
+.section-head p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 52ch;
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+}
+
+/* Philosophy / intro cards */
+.philosophy {
+  background: #1a1a1a;
+}
+
+.philosophy.section {
+  padding-bottom: 0;
+}
+
+.philosophy + .iconic-stays-section {
+  margin-top: 120px;
+}
+
+.intro-cards-head {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 100px;
+}
+
+.intro-cards-head h2 {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-lh);
+  font-weight: var(--text-h2-weight);
+  letter-spacing: var(--text-h2-ls);
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro-cards-head .lead {
+  margin: 20px auto 0;
+  color: var(--muted);
+  font-size: var(--text-p1-size);
+  font-weight: var(--text-p1-weight);
+  line-height: var(--text-p1-lh);
+  max-width: 76ch;
+}
+
+.intro-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.intro-card {
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid rgba(244, 241, 237, 0.18);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+  cursor: default;
+  pointer-events: none;
+}
+
+.intro-card__media {
+  height: 320px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0;
+}
+
+.intro-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.intro-card .intro-card__media img {
+  transform: none !important;
+  transition: none !important;
+}
+
+.intro-card__body {
+  padding: 22px 20px 24px;
+}
+
+.intro-card__body h3 {
+  font-size: var(--text-h3-size);
+  font-weight: var(--text-h3-weight);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-ls);
+  color: var(--cream);
+}
+
+.intro-card__body p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+}
+
+/* Stays */
+.stays {
+  background: radial-gradient(900px 380px at 20% 0%, rgba(198, 168, 108, 0.18), transparent 55%);
+}
+
+.stay-grid {
+  display: grid;
+  gap: 22px;
+}
+
+.stay-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--cardShadow);
+  border: 1px solid rgba(244, 241, 237, 0.08);
+  transform: translateZ(0);
+}
+
+/* Scroll reveal (sections) */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stay-media {
+  /* 要件: 高さ60vh以上で大きく表示 */
+  height: 60vh;
+  min-height: 60vh;
+  width: 100%;
+}
+
+.stay-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+  transition: transform var(--motion-transition);
+  filter: saturate(1.02) contrast(1.03);
+}
+
+.stay-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 18px 18px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.68) 35%, rgba(0, 0, 0, 0.78) 100%);
+}
+
+.stay-title {
+  color: var(--cream);
+  font-size: var(--text-h3-size);
+  font-weight: var(--text-h3-weight);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-ls);
+}
+
+.stay-location {
+  margin-top: 6px;
+  color: rgba(244, 241, 237, 0.78);
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+  letter-spacing: 0.02em;
+}
+
+.stay-arrow {
+  position: relative;
+  border-radius: var(--radius-btn);
+  border: 1px solid rgba(244, 241, 237, 0.35);
+  background: rgba(26, 26, 26, 0.18);
+  color: rgba(244, 241, 237, 0.95);
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--motion-hover), background var(--motion-hover), color var(--motion-hover);
+  flex: 0 0 auto;
+}
+
+.stay-arrow svg {
+  width: 22px;
+  height: 22px;
+  transition: transform var(--motion-hover);
+}
+
+.stay-card:hover .stay-media img {
+  transform: scale(1.12);
+}
+
+.stay-card:hover .stay-arrow {
+  background: var(--gold);
+  border-color: var(--border-accent);
+  color: var(--bg);
+}
+
+.stay-card:hover .stay-arrow svg {
+  transform: translateX(2px);
+}
+
+/* Features */
+.features {
+  background: #1a1a1a;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.feature-card {
+  border-radius: var(--radius);
+  border: 1px solid rgba(244, 241, 237, 0.2);
+  background: var(--bg-card);
+  padding: 22px 18px;
+  min-height: 190px;
+}
+
+.feature-card h3 {
+  font-size: var(--text-h3-size);
+  font-weight: var(--text-h3-weight);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-ls);
+  color: var(--cream);
+}
+
+.feature-card p {
+  margin: 12px 0 0 0;
+  color: var(--muted);
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+}
+
+.feature-card::after {
+  content: "";
+  display: block;
+  margin-top: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(198, 168, 108, 0.7), rgba(198, 168, 108, 0.12), transparent);
+}
+
+/* CTA */
+.cta.section {
+  position: relative;
+  min-height: 560px;
+  padding: 120px 0;
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  background-image: url("./image/gokayama.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.cta > .container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.cta-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.cta-label {
+  margin: 0 0 20px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c6a86c;
+}
+
+.cta-inner h2 {
+  margin: 0;
+  font-family: "Spectral", serif;
+  font-size: clamp(36px, 4.5vw, 52px);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+  color: var(--cream);
+}
+
+.cta-inner .cta-lead {
+  margin: 28px auto 0;
+  max-width: 52ch;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: var(--text-p1-size);
+  font-weight: var(--text-p1-weight);
+  line-height: 1.85;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.cta-actions .btn--cta-primary {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid rgba(198, 168, 108, 0.85);
+  color: #c6a86c;
+  box-shadow: none;
+}
+
+.cta-actions .btn--cta-primary:hover {
+  background: rgba(198, 168, 108, 0.12);
+  border-color: #c6a86c;
+  color: #d4b87a;
+}
+
+.cta-actions .btn--cta-secondary {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid rgba(244, 241, 237, 0.35);
+  color: rgba(244, 241, 237, 0.9);
+}
+
+.cta-actions .btn--cta-secondary:hover {
+  background: rgba(244, 241, 237, 0.08);
+  border-color: rgba(244, 241, 237, 0.55);
+}
+
+@media (max-width: 820px) {
+  .cta.section {
+    min-height: 480px;
+    padding: 88px 0;
+  }
+
+  .cta-inner .cta-lead {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+}
+
+/* Map interaction section */
+.map-interaction-section {
+  background: #1a1a1a;
+  color: rgba(255, 255, 255, 0.86);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.map-interaction-section > .container {
+  display: block;
+  text-align: start;
+  width: min(var(--content-max), calc(100vw - 2 * var(--page-gutter)));
+  max-width: var(--content-max);
+}
+
+.map-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid rgba(198, 168, 108, 0.25);
+  margin-bottom: 32px;
+}
+
+.map-tab {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 18px 0;
+  font-family: "Spectral", serif;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  margin-bottom: -1px;
+  text-align: center;
+  width: 100%;
+  transition: color var(--motion-hover), border-color var(--motion-hover);
+}
+
+.map-tab:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.map-tab.is-active {
+  color: rgba(255, 255, 255, 0.95);
+  border-bottom: 2px solid var(--border-accent);
+  font-weight: var(--text-h2-weight);
+  background: transparent;
+}
+
+.map-hint {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.8;
+}
+
+/* Footer */
+footer {
+  background: var(--brown);
+  color: rgba(244, 241, 237, 0.88);
+  padding: 34px 0 44px;
+  border-top: 1px solid rgba(198, 168, 108, 0.2);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(244, 241, 237, 0.72);
+}
+
+.footer-links {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: rgba(244, 241, 237, 0.85);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 10px 10px;
+  border-radius: var(--radius-btn);
+  border: 1px solid rgba(244, 241, 237, 0.2);
+  background: var(--bg-card);
+  transition: border-color var(--motion-hover);
+}
+
+.footer-links a:hover {
+  border-color: rgba(198, 168, 108, 0.35);
+}
+
+/* Theme grid (Curated Stays) */
+.theme-grid-section {
+  width: 100%;
+  margin: 0 0 28px;
+  padding: 0;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+  aspect-ratio: 16 / 9;
+}
+
+.theme-card {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.theme-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  z-index: 1;
+}
+
+.theme-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--motion-transition);
+}
+
+.theme-card:hover img {
+  transform: scale(1.05);
+}
+
+.theme-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 22px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.48);
+  color: #ffffff;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.theme-card-title {
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+  margin: 0;
+  max-width: 38ch;
+}
+
+.theme-card-option {
+  display: inline;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: var(--text-p2-weight);
+  margin-right: 0.35em;
+  opacity: 0.88;
+}
+
+.stay-list-section[id] {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 768px) {
+  .theme-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, minmax(200px, 1fr));
+    aspect-ratio: unset;
+  }
+}
+
+/* Theme itinerary lists (linked from theme grid) */
+.stay-list-section {
+  padding: 56px 0 0;
+  margin-bottom: 64px;
+  width: 100%;
+  background-color: transparent;
+  border-top: 1px solid rgba(198, 168, 108, 0.14);
+}
+
+.stay-grid + .stay-list-section {
+  margin-top: 8px;
+}
+
+.stay-list-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h3-size);
+  font-weight: var(--text-h3-weight);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-ls);
+  color: var(--cream);
+  margin: 0 0 28px;
+}
+
+.stay-list-section .stay-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  width: 100%;
+}
+
+.stay-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  width: 100%;
+}
+
+.stay-list-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.stay-list-section .stay-list-card {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  background: #000;
+  transform: none;
+}
+
+.stay-list-section .stay-list-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  z-index: 1;
+}
+
+.stay-list-section .stay-list-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--motion-transition);
+  filter: none;
+  transform: none;
+}
+
+.stay-list-section .stay-list-card:hover img {
+  transform: scale(1.05);
+}
+
+.stay-list-section .stay-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  color: #ffffff;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.stay-list-section .stay-card-title {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .stay-list-section .stay-list-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stay-list-section {
+    padding: 40px 0 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 980px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    bottom: 0;
+    width: min(var(--content-max), calc(100vw - 2 * var(--page-gutter)));
+    padding-bottom: 72px;
+    transform: translateX(-50%);
+  }
+
+  .kv-copy,
+  .kv-side {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .kv-side {
+    align-items: stretch;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feature-row {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stay-media {
+    /* 要件: 高さ60vh以上で大きく表示（モバイルでも維持） */
+    min-height: 60vh;
+    height: 60vh;
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --page-gutter: 20px;
+  }
+
+  .site-header__inner {
+    padding: 0 var(--page-gutter);
+  }
+
+  .nav {
+    gap: 4px;
+  }
+
+  .nav-link span:not(.nav-link__icon) {
+    display: none;
+  }
+
+  .nav-link {
+    padding: 8px 6px;
+  }
+
+  .hero {
+    padding-top: 0;
+  }
+
+  .hero-inner {
+    padding-bottom: 56px;
+  }
+
+  .nav-drawer__inner {
+    padding: 68px 20px 40px;
+  }
+
+  .nav-drawer__close {
+    top: 16px;
+    right: 16px;
+  }
+
+  .nav-drawer__item {
+    font-size: 16px;
+    padding: 16px 0;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+  .stay-media img,
+  .hero-tile img {
+    transition: none;
+  }
+
+  .kv-scroll {
+    animation: none;
+  }
+
+  .nav-drawer,
+  .nav-drawer__inner {
+    transition: none;
+  }
+
+  .nav-open .nav-drawer__inner {
+    transform: none;
+  }
+
+  .hero__slide,
+  .hero__slide img {
+    transition: none;
+    transform: none;
+  }
+
+  .hero__slide.is-active {
+    opacity: 1;
+  }
+
+  .hero__slide:not(.is-active) {
+    opacity: 0;
+  }
+
+  .hero__slide img {
+    filter: none;
+  }
+
+  .hero-inner .kv-copy,
+  .hero-inner .kv-side p,
+  .hero-inner .hero-actions .btn,
+  .hero .kv-scroll {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  .hero .kv-scroll {
+    transform: translateX(-50%);
+  }
+}
+
+.theme-tab-panel {
+  width: 100%;
+  margin-top: 0;
+}
+
+.theme-tab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  width: 100%;
+}
+
+.theme-tab-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.theme-tab-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--motion-transition);
+}
+
+.theme-tab-card:hover img {
+  transform: scale(1.05);
+}
+
+.theme-tab-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, transparent 100%);
+  color: #ffffff;
+}
+
+.theme-tab-option {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  opacity: 0.75;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+}
+
+.theme-tab-overlay h3 {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  font-family: "Spectral", serif;
+}
+
+.theme-stays-panel {
+  margin-top: 32px;
+}
+
+.theme-stays-panel .stay-list-section {
+  margin-bottom: 64px;
+  width: 100%;
+}
+
+.theme-stays-panel .stay-list-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Spectral", serif;
+  margin: 0 0 16px;
+  letter-spacing: 0.02em;
+}
+
+.stay-list-desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.9;
+  margin: -8px 0 24px;
+  max-width: 700px;
+}
+
+.theme-stays-panel .stay-list-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.theme-stays-panel .stay-list-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.theme-stays-panel .stay-list-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--motion-transition);
+}
+
+.theme-stays-panel .stay-list-card:hover img {
+  transform: scale(1.04);
+}
+
+.theme-stays-panel .stay-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  color: #ffffff;
+}
+
+.theme-stays-panel .stay-card-title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  font-family: "Spectral", serif;
+}
+
+@media (max-width: 980px) {
+  .theme-stays-panel .stay-list-section .stay-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .theme-stays-panel .stay-list-section .stay-list-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Japan map — split layout (map + copy + stays grid) */
+.map-body {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  border: 1px solid rgba(244, 241, 237, 0.18);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.map-body-left {
+  width: 45%;
+  flex-shrink: 0;
+  padding: 20px;
+  border-right: 1px solid rgba(244, 241, 237, 0.15);
+  background: #141414;
+}
+
+.map-svg-wrap {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.jp-map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.jp-region {
+  fill: #2a2a2a;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1px;
+  cursor: pointer;
+  transition: fill var(--motion-hover);
+  outline: none;
+}
+
+.jp-region polygon,
+.jp-region path {
+  fill: inherit;
+  stroke: inherit;
+  pointer-events: visiblePainted;
+}
+
+.jp-region:hover {
+  fill: rgba(131, 99, 36, 0.5);
+}
+
+.jp-region.is-active {
+  fill: #836324;
+}
+
+.map-body-right {
+  flex: 1;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.map-default-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #c6a86c;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.map-default-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+
+.map-default-desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.9;
+}
+
+.map-area-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.map-area-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border-radius: var(--radius-modal);
+}
+
+.map-area-img-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.map-area-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.88);
+  transition: transform var(--motion-transition), filter var(--motion-hover);
+}
+
+.map-area-info:hover .map-area-img-wrap img {
+  transform: scale(1.03);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.map-area-region {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #c6a86c;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.map-area-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+
+.map-area-desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.map-area-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.map-area-tag {
+  font-size: 11px;
+  padding: 5px 14px;
+  border: 1px solid rgba(198, 168, 108, 0.3);
+  border-radius: var(--radius-btn);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.map-stays-section {
+  margin-top: 40px;
+}
+
+.map-stays-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.map-stays-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.map-stay-card {
+  display: block;
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid rgba(244, 241, 237, 0.15);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--motion-hover);
+}
+
+.map-stay-card:hover {
+  border-color: rgba(198, 168, 108, 0.45);
+}
+
+.map-stay-card img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--motion-transition);
+}
+
+.map-stay-card:hover img {
+  transform: scale(1.05);
+}
+
+.map-stay-card-body {
+  padding: 10px 12px 12px;
+}
+
+.map-stay-card-name {
+  font-family: "Spectral", serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+
+.map-stay-card-loc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.map-stays-empty {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 24px 0;
+}
+
+@media (max-width: 980px) {
+  .map-body {
+    flex-direction: column;
+  }
+
+  .map-body-left {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(198, 168, 108, 0.15);
+  }
+
+  .map-stays-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .map-stays-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-stay-card img {
+    transition: none;
+  }
+}
+
+.iconic-stays-section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.iconic-stays-section + .map-interaction-section {
+  margin-top: 100px;
+}
+
+.iconic-stays-head {
+  max-width: 640px;
+  margin-bottom: 56px;
+}
+
+.iconic-stays-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c6a86c;
+  margin-bottom: 14px;
+}
+
+.iconic-stays-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  color: var(--cream);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  margin-bottom: 18px;
+}
+
+.iconic-stays-head .iconic-stays-desc {
+  font-size: var(--text-p1-size);
+  font-weight: var(--text-p1-weight);
+  line-height: var(--text-p1-lh);
+  color: var(--muted);
+}
+
+.iconic-stays-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.iconic-stay-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid rgba(244, 241, 237, 0.15);
+  overflow: hidden;
+  transition: border-color var(--motion-hover);
+}
+
+.iconic-stay-card:hover {
+  border-color: rgba(198, 168, 108, 0.4);
+}
+
+.iconic-stay-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.iconic-stay-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--motion-transition);
+}
+
+.iconic-stay-card:hover .iconic-stay-media img {
+  transform: scale(1.04);
+}
+
+.iconic-stay-body {
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.iconic-stay-location {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c6a86c;
+  margin: 0;
+}
+
+.iconic-stay-name {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h3-size);
+  font-weight: var(--text-h3-weight);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-ls);
+  color: var(--cream);
+  margin: 0;
+}
+
+.iconic-stay-body .iconic-stay-desc {
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+  color: var(--muted);
+  margin: 0;
+  flex: 1;
+}
+
+.iconic-stay-cta {
+  font-size: 13px;
+  color: rgba(198, 168, 108, 0.85);
+  letter-spacing: 0.04em;
+  margin-top: 8px;
+}
+
+.iconic-stay-card:hover .iconic-stay-cta {
+  color: rgba(198, 168, 108, 1);
+}
+
+@media (max-width: 768px) {
+  .iconic-stays-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Gallery section */
+.gallery-section {
+  --gallery-gap: 4px;
+  --gallery-visible: 2.5;
+  margin-top: 100px;
+  padding: 0 0 100px;
+  margin-bottom: 0;
+  background: #1a1a1a;
+  overflow-x: clip;
+}
+
+.gallery-head {
+  margin-bottom: 48px;
+}
+
+.gallery-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c6a86c;
+  margin: 0 0 14px;
+}
+
+.gallery-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  color: var(--cream);
+  margin: 0;
+}
+
+.gallery-slider {
+  width: min(var(--content-max), calc(100vw - 2 * var(--page-gutter)));
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.gallery-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 4px;
+  transition: transform var(--motion-transition);
+  will-change: transform;
+}
+
+/* コンテンツ幅1200px内で約2.5枚表示 */
+.gallery-slide {
+  flex: 0 0
+    calc(
+      (
+          min(var(--content-max), 100vw - 2 * var(--page-gutter)) -
+          (2 * var(--gallery-gap))
+        ) /
+        var(--gallery-visible)
+    );
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.gallery-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(198, 168, 108, 0.65);
+  background: rgba(26, 26, 26, 0.42);
+  color: #c6a86c;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    border-color var(--motion-hover),
+    color var(--motion-hover),
+    background var(--motion-hover);
+}
+
+.gallery-nav--prev {
+  left: 16px;
+}
+
+.gallery-nav--next {
+  right: 16px;
+}
+
+.gallery-nav:hover {
+  border-color: rgba(198, 168, 108, 0.95);
+  color: #d4b87a;
+  background: rgba(26, 26, 26, 0.62);
+}
+
+.gallery-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.gallery-nav svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 1100px) {
+  .gallery-section {
+    --gallery-visible: 2.1;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-section {
+    --gallery-visible: 1.12;
+  }
+
+  .gallery-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .gallery-nav--prev {
+    left: 10px;
+  }
+
+  .gallery-nav--next {
+    right: 10px;
+  }
+}
+
+.gallery-footer {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-view-more-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 48px;
+  border: 1px solid rgba(198, 168, 108, 0.45);
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: "Spectral", serif;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: border-color var(--motion-hover), color var(--motion-hover);
+}
+
+.gallery-view-more-btn:hover {
+  border-color: rgba(198, 168, 108, 0.9);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gallery-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--page-gutter);
+  background: rgba(0, 0, 0, 0.78);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--motion-transition),
+    visibility var(--motion-transition);
+}
+
+.gallery-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.gallery-modal-open {
+  overflow: hidden;
+}
+
+.gallery-modal__panel {
+  width: min(var(--content-max), 100%);
+  max-height: min(90vh, 900px);
+  overflow-y: auto;
+  background: #1a1a1a;
+  border: 1px solid rgba(198, 168, 108, 0.28);
+  padding: 36px 32px 40px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.gallery-modal__title {
+  margin: 0;
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  color: var(--cream);
+}
+
+.gallery-modal__close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(198, 168, 108, 0.45);
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--motion-hover), color var(--motion-hover);
+}
+
+.gallery-modal__close:hover {
+  border-color: rgba(198, 168, 108, 0.9);
+  color: #fff;
+}
+
+.gallery-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gallery-modal__item {
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.gallery-modal__item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+@media (max-width: 820px) {
+  .gallery-modal__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery-modal__panel {
+    padding: 28px 20px 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .gallery-modal__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gallery-section + .story-section {
+  margin-top: 0;
+}
+
+.story-section {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 96px;
+}
+
+.story-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.story-head-left {
+  flex-shrink: 0;
+}
+
+.story-head-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  color: var(--cream);
+  margin: 0 0 8px;
+}
+
+.story-head-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+.story-head-desc {
+  font-size: var(--text-p1-size);
+  font-weight: var(--text-p1-weight);
+  line-height: var(--text-p1-lh);
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  overflow: hidden;
+  background: var(--bg-card);
+  transition: opacity var(--motion-hover);
+}
+
+.story-card:hover {
+  opacity: 0.82;
+}
+
+.story-card-media {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.story-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--motion-transition);
+}
+
+.story-card:hover .story-card-media img {
+  transform: scale(1.04);
+}
+
+.story-card-body {
+  padding: 16px 12px 20px;
+  flex: 1;
+}
+
+.story-card-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.story-card-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-p2-size);
+  font-weight: var(--text-p2-weight);
+  line-height: var(--text-p2-lh);
+  color: var(--cream);
+  margin: 0;
+}
+
+.story-footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.story-find-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 48px;
+  border: 1px solid rgba(198, 168, 108, 0.45);
+  border-radius: var(--radius-btn);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: "Spectral", serif;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: border-color var(--motion-hover), color var(--motion-hover);
+}
+
+.story-find-btn:hover {
+  border-color: rgba(198, 168, 108, 0.9);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 980px) {
+  .story-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .story-head {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reviews-section {
+  padding: 96px 0;
+  background: #f5f0e8;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
+}
+
+.reviews-head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.reviews-title {
+  font-family: "Spectral", serif;
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  color: #836324;
+  margin: 0 0 14px;
+}
+
+.reviews-subtitle {
+  font-size: 14px;
+  color: #7a6a55;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px 32px;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-card-top {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.review-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.review-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 2px;
+}
+
+.review-country {
+  font-size: 13px;
+  color: #7a6a55;
+  margin: 0;
+}
+
+.review-experience {
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: var(--text-p2-weight);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.review-text {
+  font-size: var(--text-p2-size);
+  color: #4a3f35;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.review-author {
+  font-size: 12px;
+  color: #9a8a78;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-align: right;
+}
+
+@media (max-width: 980px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+    </style>
   </head>
   <body>
     <header class="site-header" role="banner">
@@ -27,7 +2700,7 @@
         <nav class="nav" aria-label="Primary">
           <a class="nav-link" href="https://wabunka-lux.jp/experiences/" target="_blank" rel="noopener">
             <span class="nav-link__icon" aria-hidden="true">
-              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1" />
                 <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
               </svg>
@@ -36,7 +2709,7 @@
           </a>
           <a class="nav-link" href="https://wabunka-lux.jp/contact/" target="_blank" rel="noopener">
             <span class="nav-link__icon" aria-hidden="true">
-              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="2" y="4" width="12" height="9" rx="0.5" stroke="currentColor" stroke-width="1" />
                 <path d="M2 5.5L8 9.5L14 5.5" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
               </svg>
@@ -1293,6 +3966,8 @@
         </div>
       </div>
     </section>
+
+    <footer aria-label="Footer">
       <div class="container footer-inner">
         <p class="footer-note">© <span id="year"></span> Wabunka Curated Stays. All rights reserved.</p>
         <div class="footer-links">
@@ -1300,9 +3975,750 @@
         </div>
       </div>
     </footer>
+    <script>
+/**
+ * Gallery image list (prototype).
+ * Production: replace with API response.
+ */
+window.GALLERY_ITEMS = [
+  { src: "./image/en_fujiseiran_PCKV.jpg", alt: "Mt. Fuji and onsen stay" },
+  { src: "./image/002.jpg", alt: "Japanese interior" },
+  { src: "./image/003.jpg", alt: "Traditional room detail" },
+  { src: "./image/004.jpg", alt: "Garden view" },
+  { src: "./image/005.jpg", alt: "Curated stay" },
+  { src: "./image/en_oyashikistay_AR05.jpg", alt: "Oyashiki stay" },
+  { src: "./image/en_meitokuan_AR05.jpg", alt: "Meitokuan" },
+  { src: "./image/en_takigahara-natadera_SN6.jpg", alt: "Takigahara Natadera" },
+  {
+    src: "./image/images_d704a0a1-b6ab-410b-b11c-59ec5b1e991e.jpeg",
+    alt: "Artisan sanctuary",
+  },
+];
 
-    <script src="./assets/js/gallery-data.js" defer></script>
-    <script src="./assets/js/main.js" defer></script>
-  </body>
+function renderGalleryFromData() {
+  const items = window.GALLERY_ITEMS || [];
+  const track = document.querySelector("[data-gallery-track]");
+  const grid = document.querySelector("[data-gallery-modal-grid]");
+  if (!track || !grid || !items.length) return;
+
+  const slideHtml = (item, index) =>
+    `<figure class="gallery-slide">
+      <img src="${item.src}" alt="${item.alt || ""}" loading="${index === 0 ? "eager" : "lazy"}" decoding="async" />
+    </figure>`;
+
+  const modalHtml = (item) =>
+    `<figure class="gallery-modal__item">
+      <img src="${item.src}" alt="${item.alt || ""}" loading="lazy" decoding="async" />
+    </figure>`;
+
+  track.innerHTML = items.map(slideHtml).join("");
+  grid.innerHTML = items.map(modalHtml).join("");
+}
+
+const elYear = document.getElementById("year");
+if (elYear) elYear.textContent = new Date().getFullYear();
+
+// ------------------------------
+// Menu drawer toggle
+// ------------------------------
+const navToggle = document.querySelector(".nav-toggle");
+const navDrawer = document.getElementById("navDrawer");
+const navDrawerClose = document.querySelector(".nav-drawer__close");
+const body = document.body;
+
+function setNavExpanded(expanded) {
+  if (!navToggle || !navDrawer) return;
+  navToggle.setAttribute("aria-expanded", String(expanded));
+  navToggle.setAttribute("aria-label", expanded ? "Close menu" : "Open menu");
+  navDrawer.setAttribute("aria-hidden", String(!expanded));
+  if (expanded) {
+    navDrawer.removeAttribute("inert");
+  } else {
+    navDrawer.setAttribute("inert", "");
+  }
+  body.classList.toggle("nav-open", expanded);
+}
+
+navToggle?.addEventListener("click", () => {
+  const expanded = navToggle.getAttribute("aria-expanded") === "true";
+  setNavExpanded(!expanded);
+});
+
+navDrawerClose?.addEventListener("click", () => setNavExpanded(false));
+
+navDrawer?.addEventListener("click", (e) => {
+  if (e.target === navDrawer) setNavExpanded(false);
+});
+
+navDrawer?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setNavExpanded(false));
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && navToggle?.getAttribute("aria-expanded") === "true") {
+    setNavExpanded(false);
+  }
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((a) => {
+  a.addEventListener("click", () => {
+    if (navToggle?.getAttribute("aria-expanded") === "true") setNavExpanded(false);
+  });
+});
+
+// ------------------------------
+// Reveal on scroll (Intersection Observer)
+// ------------------------------
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    }
+  },
+  { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+);
+
+function resetReveal(el) {
+  if (!el) return;
+  el.classList.remove("reveal", "is-visible");
+  revealObserver.unobserve(el);
+}
+
+function registerReveal(el, delaySec = 0) {
+  if (!el) return;
+  resetReveal(el);
+  el.classList.add("reveal");
+  el.style.setProperty("--reveal-delay", `${delaySec}s`);
+  if (prefersReducedMotion) {
+    el.classList.add("is-visible");
+    return;
+  }
+  revealObserver.observe(el);
+  requestAnimationFrame(() => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > window.innerHeight * 0.05) {
+      el.classList.add("is-visible");
+      revealObserver.unobserve(el);
+    }
+  });
+}
+
+function registerRevealAll(selector, staggerSec = 0.09, maxDelay = 0.72) {
+  document.querySelectorAll(selector).forEach((el, index) => {
+    registerReveal(el, Math.min(index * staggerSec, maxDelay));
+  });
+}
+
+registerReveal(document.querySelector(".philosophy .intro-cards-head"));
+registerRevealAll(".philosophy .intro-card");
+registerReveal(document.querySelector(".iconic-stays-section .iconic-stays-head"));
+registerRevealAll(".iconic-stays-section .iconic-stay-card");
+registerReveal(document.querySelector(".map-interaction-section .map-tabs"));
+registerReveal(document.querySelector(".map-interaction-section .map-body"));
+registerRevealAll("#themesPanel .theme-tab-grid");
+registerRevealAll("#themeStaysPanel .stay-list-section", 0.08, 0.4);
+registerRevealAll("#themeStaysPanel .stay-list-card", 0.06, 0.48);
+registerReveal(document.querySelector(".gallery-section .gallery-head"));
+registerReveal(document.querySelector(".story-section .story-head"));
+registerRevealAll(".story-section .story-card");
+registerReveal(document.querySelector(".story-section .story-footer"));
+registerReveal(document.querySelector(".reviews-section .reviews-head"));
+registerRevealAll(".reviews-section .review-card");
+registerReveal(document.querySelector(".cta .cta-inner"));
+registerReveal(document.querySelector("footer .footer-inner"));
+
+window.registerMapStayReveals = function (root) {
+  if (!root) return;
+  resetReveal(root);
+  root.querySelectorAll(".map-stay-card").forEach(resetReveal);
+  registerReveal(root, 0);
+  root.querySelectorAll(".map-stay-card").forEach((card, index) => {
+    registerReveal(card, Math.min(0.08 + index * 0.05, 0.56));
+  });
+};
+// ------------------------------
+// Japan map interactive stays
+// ------------------------------
+const AREA_INFO = {
+  hokkaido: {
+    region: "Hokkaido",
+    title: "Hokkaido",
+    desc: "Japan's vast northern frontier, where untamed wilderness meets quiet refinement. A land shaped by long winters and extraordinary nature — offering a rare stillness that invites genuine restoration.",
+    tags: ["Sapporo", "Niseko", "Furano"],
+    image:
+      "https://images.microcms-assets.io/assets/a061b71b7a084ccfa781f19d8659cbbd/909ed712f1444a9cbc7da1eaef75db5e/itinerary-long13_PCKV01.jpg",
+  },
+  tohoku: {
+    region: "Tohoku Region",
+    title: "Northern Japan",
+    desc: "A region of deep forests, ancient hot springs, and sacred mountains still untouched by mass tourism. Tohoku preserves a raw, unhurried version of Japan — where tradition endures not as performance, but as everyday life.",
+    tags: ["Aomori", "Hirosaki", "Towada"],
+    image:
+      "https://images.microcms-assets.io/assets/a061b71b7a084ccfa781f19d8659cbbd/c6eb34aeead24a33ba26af5c02ba8c74/itinerary-long13_SPKV01.jpg",
+  },
+  kanto: {
+    region: "Kanto Region",
+    title: "Tokyo & Around",
+    desc: "Beyond the luminous skyline of Tokyo lies a quieter Japan — mountain villages, sacred trails, and centuries-old sake breweries. A rare duality: world-class urban culture alongside profound rural solitude, all within reach.",
+    tags: ["Tokyo", "Kamakura", "Okutama", "Other places"],
+    image: "./image/AdobeStock_704320852.jpeg",
+  },
+  chubu: {
+    region: "Chubu Region",
+    title: "Mt. Fuji, Hakone & Beyond",
+    desc: "From the iconic silhouette of Fuji to the lacquerware ateliers of Hida Takayama, Chubu is a region of extraordinary contrasts. Private onsen villas overlook ancient crater lakes; mountain ryokan serve kaiseki composed entirely from local harvest.",
+    tags: ["Mt. Fuji & Around", "Hakone", "Hida Takayama", "Matsumoto", "Kiso"],
+    image:
+      "https://images.microcms-assets.io/assets/a061b71b7a084ccfa781f19d8659cbbd/d58a3b53393d4bd2bd77f4e8d5577c24/fujiseiran-ashinoko-numazu_PCKV.jpg",
+  },
+  kansai: {
+    region: "Kansai Region",
+    title: "Kyoto, Osaka & Around",
+    desc: "The spiritual and aesthetic heart of Japan. Kyoto's machiya townhouses and centuries-old ryokan offer an intimacy with tradition rarely found elsewhere — where a single tea ceremony or an evening with a geisha can quietly reframe how you understand beauty.",
+    tags: ["Kyoto", "Osaka", "Nara", "Other places"],
+    image:
+      "https://images.microcms-assets.io/assets/a061b71b7a084ccfa781f19d8659cbbd/43bc0fc75c11474a8edb9375fb91d94f/hiiragiya-geisha_PCKV.jpg",
+  },
+  chugoku_shikoku: {
+    region: "Chugoku & Shikoku",
+    title: "Hiroshima & the Inland Sea",
+    desc: "A constellation of islands, historic merchant towns, and world-class contemporary art. The Seto Inland Sea rewards the unhurried traveller — with private villas by architectural masters and ryokan that have stood for generations.",
+    tags: ["Hiroshima", "Onomichi", "Kurashiki", "Naoshima & Islands"],
+    image:
+      "https://images.microcms-assets.io/assets/a061b71b7a084ccfa781f19d8659cbbd/8486dd3ca4aa463cbd8858f061047f82/ryokankurashiki_PCKV.jpg",
+  },
+  kyushu: {
+    region: "Kyushu",
+    title: "Kyushu",
+    desc: "Japan's southernmost main island pulses with volcanic energy and ancient craftsmanship. From the ceramic villages of Arita to the sacred sites of Nagasaki, Kyushu holds a distinct cultural identity — warmer, wilder, and deeply its own.",
+    tags: ["Fukuoka", "Nagasaki", "Kumamoto", "Kagoshima"],
+    image:
+      "https://images.microcms-assets.io/assets/a061b71b7a084ccfa781f19d8659cbbd/ecf6469354d94fa79c041647e1ffc89f/wataya_PCKV%20(8).jpg",
+  },
+};
+
+const MAP_STAYS = {
+  hokkaido: [],
+  tohoku: [
+    {
+      name: "Aomori — Hirosaki and Towada Journey",
+      location: "Aomori",
+      url: "https://wabunka-lux.jp/itineraries/long_aomori",
+      image: "./image/en_oyashikistay_PCKV.jpg",
+    },
+  ],
+  kanto: [
+    {
+      name: "Oyashiki Stay — Shodoshima Private Villa",
+      location: "Tokyo",
+      url: "https://wabunka-lux.jp/experiences/en_oyashikistay/",
+      image: "./image/en_oyashikistay_PCKV.jpg",
+    },
+    {
+      name: "Luxury Central Tokyo Stay — Marunouchi City Tour",
+      location: "Tokyo",
+      url: "https://wabunka-lux.jp/itineraries/kitanohotel-koikeshuko",
+      image: "./image/en_oyashikistay_AR04.jpg",
+    },
+    {
+      name: "Explore Sacred Mt. Mitake — Private Riverside Villa",
+      location: "Okutama",
+      url: "https://wabunka-lux.jp/itineraries/mt-tokyo-fushi",
+      image: "./image/en_oyashikistay_AR05.jpg",
+    },
+    {
+      name: "Unwind in Okutama — Tour a 300-Year Old Sake Brewery",
+      location: "Okutama",
+      url: "https://wabunka-lux.jp/itineraries/satologue-ozawashuzo",
+      image: "./image/en_oyashikistay_PCCA01.jpg",
+    },
+    {
+      name: "Matsuzakaya Stay — Historic Machiya in Tokyo",
+      location: "Tokyo",
+      url: "https://wabunka-lux.jp/experiences/en_matsuzakaya-stay/",
+      image: "./image/images_en_ochiairo_sub_20_51525c7b.jpg",
+    },
+    {
+      name: "Miwa Yugawara — Hot Spring & Mountain Retreat",
+      location: "Kanagawa",
+      url: "https://wabunka-lux.jp/experiences/en_miwayugawara/",
+      image: "./image/en_fujiseiran_PCKV.jpg",
+    },
+    {
+      name: "Fujiya Hotel — Explore the Old Tokaido Road",
+      location: "Hakone",
+      url: "https://wabunka-lux.jp/itineraries/fujiya-explorehakone",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Fuji Seiran — Luxury Stay in Hakone & Numazu",
+      location: "Hakone · Numazu",
+      url: "https://wabunka-lux.jp/itineraries/fujiseiran-ashinoko-numazu",
+      image: "./image/images_3355d8a4-508d-4e54-a644-74ea2bc35a4c.jpeg",
+    },
+    {
+      name: "Ochiairo Ryokan — A Valley Retreat of Rare Intimacy",
+      location: "Izu, Shizuoka",
+      url: "https://wabunka-lux.jp/experiences/en_ochiairo/",
+      image: "./image/images_6950af3c-239b-4e88-9f60-6d27867c77ca.jpeg",
+    },
+    {
+      name: "Private Onsen with a View of Mt. Fuji",
+      location: "Shizuoka",
+      url: "https://wabunka-lux.jp/s/experiences",
+      image: "./image/images_6faac036-f236-4b4b-b543-1f62ea9bee8a.jpeg",
+    },
+    {
+      name: "Lounge with Mt. Fuji — Refined Day Retreat",
+      location: "Hakone",
+      url: "https://wabunka-lux.jp/s/experiences",
+      image: "./image/images_d704a0a1-b6ab-410b-b11c-59ec5b1e991e.jpeg",
+    },
+    {
+      name: "Seaside Infinity Bath — Coastal Wellness",
+      location: "Shizuoka",
+      url: "https://wabunka-lux.jp/s/experiences",
+      image: "./image/en_meitokuan_AR05.jpg",
+    },
+    {
+      name: "Forest Spa — Architecture in Nature",
+      location: "Hakone",
+      url: "https://wabunka-lux.jp/s/experiences",
+      image: "./image/en_takigahara-natadera_SN6.jpg",
+    },
+    {
+      name: "Garden-View Retreat — Quiet Tokyo Stay",
+      location: "Tokyo",
+      url: "https://wabunka-lux.jp/experiences/en_matsuzakaya-stay/",
+      image: "./image/images_en_ochiairo_sub_9_49698ae4.jpg",
+    },
+    {
+      name: "Hana Ougi — Elegant City Sanctuary",
+      location: "Tokyo",
+      url: "https://wabunka-lux.jp/experiences/en_hanaoug/",
+      image: "./image/miyama_PCKV (1).jpg",
+    },
+    {
+      name: "Riverside Villa — Sacred Mt. Mitake Journey",
+      location: "Okutama",
+      url: "https://wabunka-lux.jp/itineraries/mt-tokyo-fushi",
+      image: "./image/images_en_yoshida-sanso_sub_6_c1af9ffb (1).jpg",
+    },
+    {
+      name: "Satologue — Forest Stay & Sake Culture",
+      location: "Okutama",
+      url: "https://wabunka-lux.jp/itineraries/satologue-ozawashuzo",
+      image: "./image/007.jpg",
+    },
+    {
+      name: "Ashinoko & Numazu — Fuji Outlook Experience",
+      location: "Shizuoka",
+      url: "https://wabunka-lux.jp/itineraries/fujiseiran-ashinoko-numazu",
+      image: "./image/00278.jpg",
+    },
+    {
+      name: "Tokaido Heritage Walk — Fujiya Hotel Stay",
+      location: "Hakone",
+      url: "https://wabunka-lux.jp/itineraries/fujiya-explorehakone",
+      image: "./image/006.jpg",
+    },
+    {
+      name: "Yugawara Onsen — Mountain & Sea Serenity",
+      location: "Kanagawa",
+      url: "https://wabunka-lux.jp/experiences/en_miwayugawara/",
+      image: "./image/202106_R105_太田 (9).jpg",
+    },
+  ],
+  chubu: [
+    {
+      name: "Tour Hakone & Numazu — Luxury Stay at Fuji Seiran",
+      location: "Hakone · Numazu",
+      url: "https://wabunka-lux.jp/itineraries/fujiseiran-ashinoko-numazu",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Hakone Gora Byakudan — Premium Sake Tasting",
+      location: "Hakone",
+      url: "https://wabunka-lux.jp/itineraries/hakone-byakudan-setoshuzo",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Stay at Fujiya Hotel — Hike the Old Tokaido Road",
+      location: "Hakone",
+      url: "https://wabunka-lux.jp/itineraries/fujiya-explorehakone",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Rediscover Rural Japan — Family-Owned Ryokan in Hida",
+      location: "Hida Takayama",
+      url: "https://wabunka-lux.jp/itineraries/busuitei",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Unwind at a Stylish Ryokan — Artisanal Woodworking",
+      location: "Hida Takayama",
+      url: "https://wabunka-lux.jp/itineraries/hidatei-kazehikaru",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Tour Mt. Fuji & Yamanashi Wineries at nôtori",
+      location: "Yamanashi",
+      url: "https://wabunka-lux.jp/itineraries/notori-thousandth-wineries",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Rural Life in Yamanashi — Farm Stay & Vineyard Tour",
+      location: "Yamanashi",
+      url: "https://wabunka-lux.jp/itineraries/agriturismo-yutaka",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+    {
+      name: "Yamanaka Onsen — Lacquerware Artisan Experience",
+      location: "Kanazawa",
+      url: "https://wabunka-lux.jp/itineraries/hanamurasaki-yukamabune",
+      image: "./image/images_267478b2-ba8a-4d25-b193-fbfd8d7afb2a.jpeg",
+    },
+  ],
+  kansai: [
+    {
+      name: "ART MON ZEN KYOTO — Meitoku-an Tea Ceremony",
+      location: "Kyoto",
+      url: "https://wabunka-lux.jp/experiences/en_meitokuan/",
+      image: "./image/en_meitokuan_AR05.jpg",
+    },
+    {
+      name: "Hiiragiya Ryokan — Forge Your Own Japanese Knife",
+      location: "Kyoto",
+      url: "https://wabunka-lux.jp/itineraries/hiiragiya-kanetaka-hamono",
+      image: "./image/en_meitokuan_AR05.jpg",
+    },
+    {
+      name: "Hiiragiya Ryokan — Traditional Silk Dyeing",
+      location: "Kyoto",
+      url: "https://wabunka-lux.jp/itineraries/hiiragiya-atelier-shimura",
+      image: "./image/en_oyashikistay_AR04.jpg",
+    },
+    {
+      name: "Sumiya Ryokan — Learn Kintsugi with a Local Artisan",
+      location: "Kyoto",
+      url: "https://wabunka-lux.jp/itineraries/sumiya-shikata",
+      image: "./image/en_meitokuan_AR05.jpg",
+    },
+    {
+      name: "Hiiragiya Ryokan — An Evening with a Geisha",
+      location: "Kyoto",
+      url: "https://wabunka-lux.jp/itineraries/hiiragiya-geisha",
+      image: "./image/en_oyashikistay_AR04.jpg",
+    },
+    {
+      name: "Traditional Thatched Villa in Miyama, Rural Kyoto",
+      location: "Kyoto Rural",
+      url: "https://wabunka-lux.jp/itineraries/miyama-honkan",
+      image: "./image/en_meitokuan_AR05.jpg",
+    },
+    {
+      name: "Escape into National Park Forests near Osaka",
+      location: "Osaka",
+      url: "https://wabunka-lux.jp/experiences/en_meitokuan/",
+      image: "./image/en_oyashikistay_AR04.jpg",
+    },
+    {
+      name: "Kominka Folk Inn — History & Bounties in Gokasho",
+      location: "Nara",
+      url: "https://wabunka-lux.jp/itineraries/nipponia-gokasho-ukarokkon",
+      image: "./image/en_meitokuan_AR05.jpg",
+    },
+  ],
+  chugoku_shikoku: [
+    {
+      name: "Simose Art Garden Villa — World-Class Architecture",
+      location: "Hiroshima",
+      url: "https://wabunka-lux.jp/experiences/en_simose/",
+      image: "./image/ryokankurashiki_AR22.jpg",
+    },
+    {
+      name: "Onomichi Ryokan — Sake, Soy Sauce & Zen Temple",
+      location: "Onomichi",
+      url: "https://wabunka-lux.jp/itineraries/onomichi-3days",
+      image: "./image/ryokankurashiki_AR22.jpg",
+    },
+    {
+      name: "Ryokan Kurashiki — Historic Sugar Merchant Manor",
+      location: "Kurashiki",
+      url: "https://wabunka-lux.jp/experiences/en_ryokankurashiki-basic/",
+      image: "./image/ryokankurashiki_AR22.jpg",
+    },
+    {
+      name: "Private Villa on Shodoshima — Olive Groves & Pilgrimages",
+      location: "Naoshima & Islands",
+      url: "https://wabunka-lux.jp/experiences/en_oyashikistay/",
+      image: "./image/ryokankurashiki_AR22.jpg",
+    },
+    {
+      name: "Seto Inland Sea — Historic Soy Sauce Brewery & Inn",
+      location: "Seto Inland Sea",
+      url: "https://wabunka-lux.jp/itineraries/shintoyo-okamotoshoyu",
+      image: "./image/ryokankurashiki_AR22.jpg",
+    },
+  ],
+  kyushu: [
+    {
+      name: "Enter a World of Historic Townhouses in Sakai City",
+      location: "Osaka / Sakai",
+      url: "https://wabunka-lux.jp/experiences/en_sakainoma_yanagi/",
+      image: "./image/en_oyashikistay_PCKV.jpg",
+    },
+  ],
+};
+
+function escapeHtml(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function renderArea(key) {
+  const info = AREA_INFO[key];
+  const stays = MAP_STAYS[key] || [];
+  if (!info) return;
+
+  document.getElementById("mapDefaultMsg").style.display = "none";
+  const areaInfo = document.getElementById("mapAreaInfo");
+  areaInfo.style.display = "flex";
+  registerReveal(areaInfo, 0);
+
+  const imgEl = document.getElementById("mapAreaImg");
+  if (imgEl && info.image) {
+    imgEl.src = info.image;
+    imgEl.alt = info.title;
+  }
+
+  document.getElementById("mapAreaRegion").textContent = info.region;
+  document.getElementById("mapAreaTitle").textContent = info.title;
+  document.getElementById("mapAreaDesc").textContent = info.desc;
+  document.getElementById("mapAreaTags").innerHTML = info.tags
+    .map((t) => `<span class="map-area-tag">${escapeHtml(t)}</span>`)
+    .join("");
+
+  const section = document.getElementById("mapStaysSection");
+  const grid = document.getElementById("mapStaysGrid");
+  const label = document.getElementById("mapStaysLabel");
+
+  if (!stays.length) {
+    section.style.display = "block";
+    label.textContent = "";
+    grid.innerHTML = `<p class="map-stays-empty">More stays coming soon for this region.</p>`;
+    if (typeof window.registerMapStayReveals === "function") {
+      window.registerMapStayReveals(section);
+    }
+    return;
+  }
+
+  label.textContent = `${info.title} — ${stays.length} curated experience${stays.length > 1 ? "s" : ""}`;
+  grid.innerHTML = stays
+    .map(
+      (stay) => `
+    <a class="map-stay-card" href="${escapeHtml(stay.url)}" target="_blank" rel="noopener">
+<img src="${escapeHtml(stay.image)}" alt="${escapeHtml(stay.name)}" loading="lazy" decoding="async" />
+<div class="map-stay-card-body">
+  <p class="map-stay-card-name">${escapeHtml(stay.name)}</p>
+  <p class="map-stay-card-loc">${escapeHtml(stay.location)}</p>
+</div>
+    </a>
+  `
+    )
+    .join("");
+
+  section.style.display = "block";
+  if (typeof window.registerMapStayReveals === "function") {
+    window.registerMapStayReveals(section);
+  }
+}
+
+const regionEls = document.querySelectorAll(".jp-region[data-region]");
+regionEls.forEach((el) => {
+  el.style.pointerEvents = "auto";
+  el.addEventListener("click", (e) => {
+    if (!el.contains(e.target)) return;
+    regionEls.forEach((r) => r.classList.remove("is-active"));
+    el.classList.add("is-active");
+    renderArea(el.dataset.region);
+  });
+  el.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    regionEls.forEach((r) => r.classList.remove("is-active"));
+    el.classList.add("is-active");
+    renderArea(el.dataset.region);
+  });
+});
+
+const mapTabEls = document.querySelectorAll("[data-map-tab]");
+const destinationsPanel = document.getElementById("destinationsPanel");
+const themesPanel = document.getElementById("themesPanel");
+
+mapTabEls.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    mapTabEls.forEach((t) => t.classList.toggle("is-active", t === tab));
+    const key = tab.getAttribute("data-map-tab");
+    if (destinationsPanel) destinationsPanel.style.display = key === "destinations" ? "block" : "none";
+    if (themesPanel) themesPanel.style.display = key === "themes" ? "block" : "none";
+  });
+});
+
+
+// Gallery slider
+renderGalleryFromData();
+(function initGallerySlider() {
+  const root = document.querySelector("[data-gallery-slider]");
+  if (!root) return;
+
+  const track = root.querySelector(".gallery-track");
+  const viewport = root.querySelector(".gallery-viewport");
+  const prevBtn = root.querySelector(".gallery-nav--prev");
+  const nextBtn = root.querySelector(".gallery-nav--next");
+  const slides = root.querySelectorAll(".gallery-slide");
+  if (!track || !viewport || !slides.length) return;
+
+  let index = 0;
+
+  function getGap() {
+    return parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0") || 0;
+  }
+
+  function getVisibleCount() {
+    const step = getStep();
+    if (!step) return 1;
+    return Math.max(1, (viewport.clientWidth + getGap()) / step);
+  }
+
+  function getStep() {
+    const slide = slides[0];
+    if (!slide) return 0;
+    return slide.getBoundingClientRect().width + getGap();
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, Math.ceil(slides.length - getVisibleCount()));
+  }
+
+  function update() {
+    const maxIndex = getMaxIndex();
+    index = Math.min(Math.max(index, 0), maxIndex);
+    track.style.transform = `translateX(${-index * getStep()}px)`;
+    if (prevBtn) prevBtn.disabled = index <= 0;
+    if (nextBtn) nextBtn.disabled = index >= maxIndex;
+  }
+
+  prevBtn?.addEventListener("click", () => {
+    index -= 1;
+    update();
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    index += 1;
+    update();
+  });
+
+  window.addEventListener("resize", update);
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(update);
+  }
+  window.addEventListener("load", update);
+  update();
+})();
+
+// Gallery modal (View More)
+(function initGalleryModal() {
+  const modal = document.getElementById("galleryModal");
+  const openBtn = document.querySelector("[data-gallery-open]");
+  if (!modal || !openBtn) return;
+
+  const panel = modal.querySelector(".gallery-modal__panel");
+  const closeBtn = modal.querySelector("[data-gallery-close]");
+  let lastFocused = null;
+
+  function openModal() {
+    lastFocused = document.activeElement;
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    modal.classList.add("is-open");
+    document.body.classList.add("gallery-modal-open");
+    closeBtn?.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    modal.hidden = true;
+    document.body.classList.remove("gallery-modal-open");
+    if (lastFocused && typeof lastFocused.focus === "function") {
+      lastFocused.focus();
+    }
+  }
+
+  openBtn.addEventListener("click", openModal);
+  closeBtn?.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  panel?.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+      closeModal();
+    }
+  });
+})();
+
+// Hero KV slideshow
+(function initHeroSlideshow() {
+  const slides = document.querySelectorAll(".hero__slide");
+  if (slides.length < 2) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) {
+    slides.forEach((slide, i) => slide.classList.toggle("is-active", i === 0));
+    return;
+  }
+
+  let index = 0;
+  const intervalMs = 5500;
+
+  setInterval(() => {
+    slides[index].classList.remove("is-active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("is-active");
+  }, intervalMs);
+})();
+
+// デフォルトで関東を選択済み状態にする
+const defaultRegion = "kanto";
+const defaultEl = document.querySelector(
+  '.jp-region[data-region="' + defaultRegion + '"]'
+);
+if (defaultEl) {
+  defaultEl.classList.add("is-active");
+}
+renderArea(defaultRegion);
+document.getElementById("mapDefaultMsg") &&
+  (document.getElementById("mapDefaultMsg").style.display = "none");
+document.getElementById("mapAreaInfo") &&
+  (document.getElementById("mapAreaInfo").style.display = "flex");
+
+
+    </script>
+</body>
 </html>
 
